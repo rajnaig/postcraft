@@ -274,32 +274,6 @@ PLATFORM_SETTINGS = {
 }
 ```
 
-## 🧪 Testing
-
-### Backend Tests
-
-```bash
-cd backend
-pytest
-
-# With coverage
-pytest --cov=app tests/
-```
-
-### Frontend Tests
-
-```bash
-cd postcraft-frontend
-
-# Unit tests
-ng test
-
-# E2E tests
-ng e2e
-
-# Build verification
-ng build --configuration production
-```
 
 ## 🚀 Production Deployment
 
@@ -419,16 +393,6 @@ This software is protected by:
 
 **Gábor Rajnai**
 - 📧 **Email**: [rajnaigabor3@gmail.com](mailto:rajnaigabor3@gmail.com)
-- 💼 **LinkedIn**: [linkedin.com/in/gaborrajnai](https://linkedin.com/in/gaborrajnai)
-- 🐙 **GitHub**: [@rajnaig](https://github.com/rajnaig)
-
----
-
-## 🔗 Links
-
-- [API Documentation](http://localhost:8000/docs)
-- [GitHub Repository](https://github.com/rajnaig/postcraft)
-
 ---
 
 <div align="center">
