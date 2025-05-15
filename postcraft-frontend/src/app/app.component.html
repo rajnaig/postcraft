@@ -1,0 +1,43 @@
+<!-- Ultra-Modern Navigation with Professional Icons -->
+<header class="app-header">
+  <nav class="app-nav">
+    <a routerLink="/" class="app-brand">
+      <span class="app-logo">PostCraft</span>
+    </a>
+
+    <div class="nav-links">
+      <a
+        class="nav-link"
+        routerLink="/"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <mat-icon class="nav-icon">chat_bubble_outline</mat-icon>
+        <span>Chat</span>
+      </a>
+
+      <a
+        class="nav-link"
+        routerLink="/generator"
+        routerLinkActive="active-link"
+      >
+        <mat-icon class="nav-icon">edit_note</mat-icon>
+        <span>Form</span>
+      </a>
+
+      <a class="nav-link" routerLink="/profiles" routerLinkActive="active-link">
+        <mat-icon class="nav-icon">person_outline</mat-icon>
+        <span>Profilok</span>
+      </a>
+
+      <a class="nav-link" routerLink="/history" routerLinkActive="active-link">
+        <mat-icon class="nav-icon">history</mat-icon>
+        <span>Előzmények</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main class="main-container">
+  <router-outlet></router-outlet>
+</main>

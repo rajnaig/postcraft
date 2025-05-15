@@ -1,0 +1,79 @@
+<!-- src/app/components/history/history.component.html -->
+<div class="history-container">
+  <div class="history-header">
+    <h1>📚 Generálási Előzmények</h1>
+    <p>Az utóbbi generált posztok áttekintése</p>
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Keresés az előzményekben</mat-label>
+      <input matInput placeholder="Pl. termék, akció..." />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="history-list">
+    <mat-card *ngFor="let item of historyItems" class="history-item">
+      <mat-card-header>
+        <mat-card-title class="history-title">
+          {{ item.message | slice : 0 : 50
+          }}{{ item.message.length > 50 ? "..." : "" }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{ item.created_at | date : "medium" }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="history-meta">
+          <mat-chip-listbox class="platform-chips">
+            <mat-chip-option *ngFor="let platform of item.platforms">
+              <mat-icon class="platform-icon">{{
+                getPlatformIcon(platform)
+              }}</mat-icon>
+              {{ platform }}
+            </mat-chip-option>
+          </mat-chip-listbox>
+
+          <div class="history-settings">
+            <span class="setting-item">
+              <mat-icon>mood</mat-icon>
+              {{ item.vibe }}
+            </span>
+            <span class="setting-item">
+              <mat-icon>format_text</mat-icon>
+              {{ item.style }}
+            </span>
+            <span class="setting-item" *ngIf="item.use_emojis">
+              <mat-icon>emoji_emotions</mat-icon>
+              Emoji
+            </span>
+          </div>
+        </div>
+
+        <div class="audience-info">
+          <strong>Célközönség:</strong> {{ item.audience }}
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-button (click)="viewDetails(item)">
+          <mat-icon>visibility</mat-icon>
+          Részletek
+        </button>
+        <button mat-button (click)="useAgain(item)">
+          <mat-icon>replay</mat-icon>
+          Újra használ
+        </button>
+        <button mat-button color="warn" (click)="deleteItem(item)">
+          <mat-icon>delete</mat-icon>
+          Törlés
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div *ngIf="historyItems.length === 0" class="empty-state">
+    <mat-icon class="empty-icon">history</mat-icon>
+    <h3>Nincs előzmény</h3>
+    <p>Kezdjen el posztokat generálni a használat nyomon követéséhez</p>
+  </div>
+</div>

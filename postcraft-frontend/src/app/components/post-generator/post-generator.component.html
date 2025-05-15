@@ -1,0 +1,145 @@
+<div class="generator-container">
+  <div class="generator-header">
+    <h1>PostCraft Social Media Generator</h1>
+    <p>
+      Hozz létre optimalizált social media posztokat egyetlen marketing
+      üzenetből
+    </p>
+  </div>
+
+  <div class="card">
+    <form
+      [formGroup]="generatorForm"
+      (ngSubmit)="onSubmit()"
+      class="generator-form"
+    >
+      <div class="form-section">
+        <h2 class="section-title">Alapinformációk</h2>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Marketing üzenet</mat-label>
+          <textarea
+            matInput
+            formControlName="message"
+            placeholder="Pl. Új termékünk most 20% kedvezménnyel kapható!"
+            rows="3"
+          ></textarea>
+          <mat-error *ngIf="formControls['message'].hasError('required')">
+            A marketing üzenet megadása kötelező
+          </mat-error>
+          <mat-error *ngIf="formControls['message'].hasError('minlength')">
+            A marketing üzenet legalább 10 karakter hosszú legyen
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Célközönség</mat-label>
+          <input
+            matInput
+            formControlName="audience"
+            placeholder="Pl. 25-35 éves hobbigamerek"
+          />
+          <mat-error *ngIf="formControls['audience'].hasError('required')">
+            A célközönség megadása kötelező
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-section">
+        <h2 class="section-title">Stílus és hangnem</h2>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Hangnem (vibe)</mat-label>
+            <mat-select formControlName="vibe">
+              <mat-option
+                *ngFor="let option of vibeOptions"
+                [value]="option.id"
+              >
+                {{ option.name }} - {{ option.description }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Stílus</mat-label>
+            <mat-select formControlName="style">
+              <mat-option
+                *ngFor="let option of styleOptions"
+                [value]="option.id"
+              >
+                {{ option.name }} - {{ option.description }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-slide-toggle formControlName="use_emojis" color="primary">
+            Emojik használata
+          </mat-slide-toggle>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h2 class="section-title">Platformok és opciók</h2>
+
+        <div class="platforms-selection">
+          <label>Válaszd ki a platformokat:</label>
+          <div class="platforms-grid">
+            <mat-checkbox
+              *ngFor="let platform of platforms"
+              [checked]="generatorForm.value.platforms.includes(platform.id)"
+              (change)="togglePlatform(platform.id)"
+              class="platform-checkbox"
+            >
+              <div class="platform-label">
+                <mat-icon>{{ getPlatformIcon(platform.id) }}</mat-icon>
+                <span>{{ platform.name }}</span>
+              </div>
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <div class="form-row options-row">
+          <mat-slide-toggle formControlName="ab_testing" color="primary">
+            A/B tesztelési változatok
+          </mat-slide-toggle>
+
+          <mat-slide-toggle
+            formControlName="include_scheduling"
+            color="primary"
+          >
+            Ütemezési javaslatok
+          </mat-slide-toggle>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="generatorForm.invalid || isLoading"
+          class="generate-button"
+        >
+          <mat-spinner
+            *ngIf="isLoading"
+            [diameter]="24"
+            class="button-spinner"
+          ></mat-spinner>
+          <span *ngIf="!isLoading">Posztok generálása</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    <mat-icon>error</mat-icon> {{ error }}
+  </div>
+
+  <app-result-display
+    *ngIf="generationResult"
+    [result]="generationResult"
+  ></app-result-display>
+</div>

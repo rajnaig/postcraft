@@ -1,0 +1,214 @@
+<div class="preview-container">
+  <!-- Facebook mock -->
+  <div class="facebook-preview" *ngIf="platform === 'facebook'">
+    <div class="fb-header">
+      <div class="fb-user-info">
+        <div class="fb-profile-pic">
+          <img [src]="profilePicture" alt="Profile" />
+        </div>
+        <div class="fb-name-time">
+          <div class="fb-name">{{ profileName }}</div>
+          <div class="fb-time">{{ currentTime | date : "shortTime" }}</div>
+        </div>
+      </div>
+      <div class="fb-menu">
+        <mat-icon>more_horiz</mat-icon>
+      </div>
+    </div>
+
+    <div class="fb-content">
+      <p class="fb-text">{{ postContent }}</p>
+
+      <div class="fb-hashtags" *ngIf="hashtags && hashtags.length > 0">
+        <span *ngFor="let tag of hashtags" class="fb-hashtag">{{ tag }}</span>
+      </div>
+
+      <div
+        class="fb-image"
+        *ngIf="imageSuggestions && imageSuggestions.length > 0"
+      >
+        <div class="image-placeholder">
+          <mat-icon>photo</mat-icon>
+          <span>{{ imageSuggestions[0] }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fb-actions">
+      <div class="fb-action-btn">
+        <mat-icon>thumb_up</mat-icon>
+        <span>Tetszik</span>
+      </div>
+      <div class="fb-action-btn">
+        <mat-icon>chat_bubble_outline</mat-icon>
+        <span>Hozzászólás</span>
+      </div>
+      <div class="fb-action-btn">
+        <mat-icon>share</mat-icon>
+        <span>Megosztás</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instagram mock -->
+  <div class="instagram-preview" *ngIf="platform === 'instagram'">
+    <div class="ig-header">
+      <div class="ig-user-info">
+        <div class="ig-profile-pic">
+          <img [src]="profilePicture" alt="Profile" />
+        </div>
+        <div class="ig-username">{{ userName }}</div>
+      </div>
+      <div class="ig-menu">
+        <mat-icon>more_horiz</mat-icon>
+      </div>
+    </div>
+
+    <div class="ig-image">
+      <div class="image-placeholder">
+        <mat-icon>photo</mat-icon>
+        <span *ngIf="imageSuggestions && imageSuggestions.length > 0">{{
+          imageSuggestions[0]
+        }}</span>
+        <span *ngIf="!imageSuggestions || imageSuggestions.length === 0"
+          >Kép helye</span
+        >
+      </div>
+    </div>
+
+    <div class="ig-actions">
+      <div class="ig-main-actions">
+        <mat-icon>favorite_border</mat-icon>
+        <mat-icon>chat_bubble_outline</mat-icon>
+        <mat-icon>send</mat-icon>
+      </div>
+      <div class="ig-save">
+        <mat-icon>bookmark_border</mat-icon>
+      </div>
+    </div>
+
+    <div class="ig-content">
+      <p class="ig-text">
+        <span class="ig-username">{{ userName }}</span>
+        {{ postContent }}
+      </p>
+
+      <div class="ig-hashtags" *ngIf="hashtags && hashtags.length > 0">
+        <span *ngFor="let tag of hashtags" class="ig-hashtag">{{ tag }}</span>
+      </div>
+
+      <div class="ig-time">{{ currentTime | date : "shortTime" }}</div>
+    </div>
+  </div>
+
+  <!-- LinkedIn mock -->
+  <div class="linkedin-preview" *ngIf="platform === 'linkedin'">
+    <div class="li-header">
+      <div class="li-user-info">
+        <div class="li-profile-pic">
+          <img [src]="profilePicture" alt="Profile" />
+        </div>
+        <div class="li-name-details">
+          <div class="li-name">{{ profileName }}</div>
+          <div class="li-company">Your Company • Követem</div>
+          <div class="li-time">
+            {{ currentTime | date : "mediumDate" }} • Szerkesztve •
+            <mat-icon>public</mat-icon>
+          </div>
+        </div>
+      </div>
+      <div class="li-menu">
+        <mat-icon>more_horiz</mat-icon>
+      </div>
+    </div>
+
+    <div class="li-content">
+      <p class="li-text">{{ postContent }}</p>
+
+      <div class="li-hashtags" *ngIf="hashtags && hashtags.length > 0">
+        <span *ngFor="let tag of hashtags" class="li-hashtag">{{ tag }}</span>
+      </div>
+    </div>
+
+    <div class="li-stats">
+      <div class="li-reactions">
+        <span class="li-reaction-icons">
+          <span class="li-like">👍</span>
+          <span class="li-clap">👏</span>
+        </span>
+        <span class="li-count">42</span>
+      </div>
+      <div class="li-comments">4 hozzászólás</div>
+    </div>
+
+    <div class="li-actions">
+      <div class="li-action-btn">
+        <mat-icon>thumb_up</mat-icon>
+        <span>Tetszik</span>
+      </div>
+      <div class="li-action-btn">
+        <mat-icon>chat_bubble_outline</mat-icon>
+        <span>Hozzászólás</span>
+      </div>
+      <div class="li-action-btn">
+        <mat-icon>share</mat-icon>
+        <span>Megosztás</span>
+      </div>
+      <div class="li-action-btn">
+        <mat-icon>send</mat-icon>
+        <span>Küldés</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- X (Twitter) mock -->
+  <div class="twitter-preview" *ngIf="platform === 'x'">
+    <div class="tw-header">
+      <div class="tw-profile-pic">
+        <img [src]="profilePicture" alt="Profile" />
+      </div>
+      <div class="tw-user-info">
+        <div class="tw-name">{{ profileName }}</div>
+        <div class="tw-username">{{ "@" }}{{ userName }}</div>
+      </div>
+      <div class="tw-menu">
+        <mat-icon>more_horiz</mat-icon>
+      </div>
+    </div>
+
+    <div class="tw-content">
+      <p class="tw-text">{{ postContent }}</p>
+
+      <div class="tw-hashtags" *ngIf="hashtags && hashtags.length > 0">
+        <span *ngFor="let tag of hashtags" class="tw-hashtag">{{ tag }}</span>
+      </div>
+    </div>
+
+    <div class="tw-time">
+      {{ currentTime | date : "shortTime" }} ·
+      {{ currentTime | date : "mediumDate" }}
+    </div>
+
+    <div class="tw-actions">
+      <div class="tw-action-btn">
+        <mat-icon>chat_bubble_outline</mat-icon>
+        <span>12</span>
+      </div>
+      <div class="tw-action-btn">
+        <mat-icon>repeat</mat-icon>
+        <span>8</span>
+      </div>
+      <div class="tw-action-btn">
+        <mat-icon>favorite_border</mat-icon>
+        <span>24</span>
+      </div>
+      <div class="tw-action-btn">
+        <mat-icon>bar_chart</mat-icon>
+        <span>3.2K</span>
+      </div>
+      <div class="tw-action-btn">
+        <mat-icon>share</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

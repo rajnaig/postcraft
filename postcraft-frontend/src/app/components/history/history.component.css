@@ -1,0 +1,139 @@
+/* src/app/components/history/history.component.css */
+.history-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.history-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-radius: 16px;
+  color: white;
+}
+
+.history-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.history-header p {
+  margin: 0 0 1rem 0;
+  opacity: 0.9;
+}
+
+.search-field {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  min-width: 300px;
+}
+
+.search-field .mat-mdc-form-field-flex {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.search-field input {
+  color: white;
+}
+
+.search-field mat-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.history-item {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+}
+
+.history-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.history-title {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.history-meta {
+  margin: 1rem 0;
+}
+
+.platform-chips {
+  margin-bottom: 1rem;
+}
+
+.platform-chips mat-chip-option {
+  margin-right: 0.5rem;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+}
+
+.platform-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  margin-right: 0.25rem;
+}
+
+.history-settings {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.setting-item mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  margin-right: 0.5rem;
+  color: #6366f1;
+}
+
+.audience-info {
+  color: #374151;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #6b7280;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  color: #d1d5db;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .search-field {
+    min-width: 200px;
+  }
+
+  .history-settings {
+    gap: 0.5rem;
+  }
+}

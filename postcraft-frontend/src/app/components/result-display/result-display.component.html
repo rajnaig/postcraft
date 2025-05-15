@@ -1,0 +1,168 @@
+<div class="result-container">
+  <div class="result-header">
+    <h2>Generált posztok</h2>
+    <p>Generálás időpontja: {{ result.generated_at | date : "medium" }}</p>
+  </div>
+
+  <div class="platform-tabs">
+    <button
+      *ngFor="let platform of availablePlatforms"
+      class="platform-tab"
+      [class.active]="selectedPlatform === platform"
+      (click)="selectedPlatform = platform"
+    >
+      <mat-icon>{{ getPlatformIcon(platform) }}</mat-icon>
+      {{ getPlatformName(platform) }}
+    </button>
+  </div>
+
+  <div
+    class="platform-content"
+    *ngIf="selectedPlatform && result.posts[selectedPlatform]"
+  >
+    <div
+      class="version-tabs"
+      *ngIf="result.posts[selectedPlatform].versions.length > 1"
+    >
+      <button
+        *ngFor="
+          let version of result.posts[selectedPlatform].versions;
+          let i = index
+        "
+        class="version-tab"
+        [class.active]="selectedVersionIndex === i"
+        (click)="changeVersion(i)"
+      >
+        Verzió {{ i + 1 }}
+      </button>
+    </div>
+
+    <mat-card
+      class="post-preview"
+      *ngIf="result.posts[selectedPlatform].versions[selectedVersionIndex]"
+    >
+      <mat-card-header>
+        <div class="platform-info">
+          <mat-icon>{{ getPlatformIcon(selectedPlatform) }}</mat-icon>
+          <span>{{ getPlatformName(selectedPlatform) }}</span>
+        </div>
+
+        <div class="post-actions">
+          <button
+            mat-icon-button
+            matTooltip="Másolás a vágólapra"
+            (click)="
+              copyToClipboard(
+                result.posts[selectedPlatform].versions[selectedVersionIndex]
+                  .text
+              )
+            "
+          >
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="post-text">
+          {{
+            result.posts[selectedPlatform].versions[selectedVersionIndex].text
+          }}
+        </p>
+
+        <div
+          class="post-hashtags"
+          *ngIf="
+            result.posts[selectedPlatform].versions[selectedVersionIndex]
+              .hashtags?.length
+          "
+        >
+          <span
+            *ngFor="
+              let hashtag of result.posts[selectedPlatform].versions[
+                selectedVersionIndex
+              ].hashtags
+            "
+            class="hashtag"
+          >
+            {{ hashtag }}
+          </span>
+        </div>
+
+        <div
+          class="post-images"
+          *ngIf="
+            result.posts[selectedPlatform].versions[selectedVersionIndex]
+              .image_suggestions?.length
+          "
+        >
+          <div
+            class="image-suggestion"
+            *ngFor="
+              let suggestion of result.posts[selectedPlatform].versions[
+                selectedVersionIndex
+              ].image_suggestions;
+              let i = index
+            "
+          >
+            <div class="image-placeholder">
+              <mat-icon>image</mat-icon>
+            </div>
+            <p class="image-description">{{ suggestion }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-footer>
+        <div class="post-footer">
+          <div
+            class="character-count"
+            [ngClass]="
+              getCharacterLimitClass(
+                selectedPlatform,
+                result.posts[selectedPlatform].tips.character_count
+              )
+            "
+          >
+            {{ result.posts[selectedPlatform].tips.character_count }} karakter
+          </div>
+
+          <div
+            class="posting-time"
+            *ngIf="result.posts[selectedPlatform].tips.optimal_posting_time"
+          >
+            <mat-icon>schedule</mat-icon>
+            <span
+              >Ajánlott posztolási idő:
+              {{
+                result.posts[selectedPlatform].tips.optimal_posting_time
+              }}</span
+            >
+          </div>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+
+    <div class="platform-preview-container">
+      <h3 class="preview-title">
+        <mat-icon>visibility</mat-icon>
+        Előnézet: hogyan fog kinézni a poszt
+      </h3>
+
+      <app-platform-preview
+        [platform]="selectedPlatform"
+        [postContent]="
+          result.posts[selectedPlatform].versions[selectedVersionIndex].text
+        "
+        [hashtags]="
+          result.posts[selectedPlatform].versions[selectedVersionIndex].hashtags
+        "
+        [imageSuggestions]="
+          result.posts[selectedPlatform].versions[selectedVersionIndex]
+            .image_suggestions || []
+        "
+      >
+      </app-platform-preview>
+    </div>
+  </div>
+</div>

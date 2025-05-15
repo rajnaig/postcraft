@@ -1,0 +1,268 @@
+/* Modern chat-like design for PostCraft */
+.generator-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+.generator-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-radius: 16px;
+  color: white;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
+}
+
+.generator-header h1 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.generator-header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.form-section {
+  padding: 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.form-section:last-child {
+  border-bottom: none;
+}
+
+.section-title {
+  color: #1e293b;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 4px;
+  height: 24px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 2px;
+}
+
+/* Material form field overrides */
+.mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  background-color: #f8fafc;
+  border-radius: 8px;
+}
+
+.mat-mdc-form-field .mat-mdc-text-field-wrapper:hover {
+  background-color: #f1f5f9;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-outline {
+  color: #6366f1;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 48%;
+}
+
+@media (max-width: 768px) {
+  .half-width {
+    width: 100%;
+  }
+}
+
+/* Platform selection styling */
+.platforms-selection label {
+  display: block;
+  color: #475569;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.platform-checkbox .platform-label {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.platform-checkbox .platform-label:hover {
+  border-color: #8b5cf6;
+  background-color: #faf5ff;
+}
+
+.platform-checkbox .platform-label mat-icon {
+  margin-right: 0.5rem;
+  color: #6366f1;
+  font-size: 20px;
+}
+
+.platform-checkbox .platform-label span {
+  font-weight: 500;
+  color: #374151;
+}
+
+.platform-checkbox.mat-mdc-checkbox-checked .platform-label {
+  border-color: #6366f1;
+  background-color: #f0f9ff;
+}
+
+.options-row {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .options-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+/* Action buttons */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  background-color: #fafafa;
+}
+
+.generate-button {
+  min-width: 240px;
+  height: 56px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.generate-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+
+.generate-button:active {
+  transform: translateY(0);
+}
+
+.generate-button:disabled {
+  opacity: 0.7;
+  transform: none;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.1);
+}
+
+.button-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Error messages */
+.error-message {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.error-message mat-icon {
+  margin-right: 0.75rem;
+  color: #dc2626;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .generator-container {
+    padding: 0.5rem;
+  }
+
+  .generator-header {
+    padding: 1rem;
+  }
+
+  .generator-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    border-radius: 12px;
+  }
+
+  .form-section {
+    padding: 1rem;
+  }
+}
+
+/* Animation for form loading */
+.generator-form {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

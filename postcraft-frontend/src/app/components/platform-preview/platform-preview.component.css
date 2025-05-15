@@ -1,0 +1,454 @@
+/* // Közös stílusok */
+.preview-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.image-placeholder {
+  height: 300px;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: var(--primary-light);
+    margin-bottom: 1rem;
+  }
+
+  span {
+    padding: 0 1rem;
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+  }
+}
+
+/* // Facebook stílusok */
+.facebook-preview {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.fb-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px;
+}
+
+.fb-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.fb-profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 8px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.fb-name-time {
+  display: flex;
+  flex-direction: column;
+}
+
+.fb-name {
+  font-weight: 600;
+  color: #050505;
+}
+
+.fb-time {
+  font-size: 12px;
+  color: #65676b;
+}
+
+.fb-menu {
+  color: #65676b;
+}
+
+.fb-content {
+  padding: 0 12px 12px;
+}
+
+.fb-text {
+  margin-bottom: 12px;
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+.fb-hashtags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.fb-hashtag {
+  color: #1877f2;
+  font-weight: 500;
+}
+
+.fb-actions {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #ddd;
+  padding: 4px 12px;
+}
+
+.fb-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #65676b;
+  font-weight: 500;
+
+  mat-icon {
+    margin-right: 4px;
+  }
+
+  &:hover {
+    background-color: #f0f2f5;
+  }
+}
+
+/* // Instagram stílusok */
+.instagram-preview {
+  border: 1px solid #ddd;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ig-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+}
+
+.ig-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.ig-profile-pic {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 8px;
+  border: 2px solid #e1306c;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.ig-username {
+  font-weight: 600;
+  color: #262626;
+}
+
+.ig-menu {
+  color: #262626;
+}
+
+.ig-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+}
+
+.ig-main-actions {
+  display: flex;
+  gap: 16px;
+
+  mat-icon {
+    font-size: 24px;
+    color: #262626;
+  }
+}
+
+.ig-content {
+  padding: 0 12px 12px;
+}
+
+.ig-text {
+  margin-bottom: 8px;
+  line-height: 1.4;
+
+  .ig-username {
+    font-weight: 600;
+    margin-right: 4px;
+  }
+}
+
+.ig-hashtags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.ig-hashtag {
+  color: #00376b;
+}
+
+.ig-time {
+  font-size: 12px;
+  color: #8e8e8e;
+  text-transform: uppercase;
+}
+
+/* // LinkedIn stílusok */
+.linkedin-preview {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.li-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px;
+}
+
+.li-user-info {
+  display: flex;
+}
+
+.li-profile-pic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 8px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.li-name-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.li-name {
+  font-weight: 600;
+  color: #000000;
+}
+
+.li-company {
+  font-size: 14px;
+  color: #666666;
+}
+
+.li-time {
+  font-size: 12px;
+  color: #666666;
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+  }
+}
+
+.li-menu {
+  color: #666666;
+}
+
+.li-content {
+  padding: 0 12px 12px;
+}
+
+.li-text {
+  margin-bottom: 12px;
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+.li-hashtags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.li-hashtag {
+  color: #0a66c2;
+  font-weight: 500;
+}
+
+.li-stats {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 12px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  font-size: 12px;
+  color: #666666;
+}
+
+.li-reactions {
+  display: flex;
+  align-items: center;
+}
+
+.li-reaction-icons {
+  margin-right: 4px;
+}
+
+.li-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 12px;
+}
+
+.li-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  cursor: pointer;
+  color: #666666;
+  font-size: 12px;
+
+  mat-icon {
+    margin-bottom: 4px;
+  }
+
+  &:hover {
+    color: #0a66c2;
+  }
+}
+
+/* // Twitter/X stílusok */
+.twitter-preview {
+  border: 1px solid #ddd;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.tw-header {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.tw-profile-pic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 12px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.tw-user-info {
+  flex-grow: 1;
+}
+
+.tw-name {
+  font-weight: 700;
+  color: #000000;
+}
+
+.tw-username {
+  color: #657786;
+}
+
+.tw-menu {
+  color: #657786;
+}
+
+.tw-content {
+  margin-bottom: 12px;
+}
+
+.tw-text {
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.tw-hashtags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.tw-hashtag {
+  color: #1da1f2;
+}
+
+.tw-time {
+  color: #657786;
+  font-size: 14px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 12px;
+}
+
+.tw-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tw-action-btn {
+  display: flex;
+  align-items: center;
+  color: #657786;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin-right: 4px;
+  }
+
+  span {
+    font-size: 14px;
+  }
+
+  &:hover {
+    color: #1da1f2;
+  }
+}

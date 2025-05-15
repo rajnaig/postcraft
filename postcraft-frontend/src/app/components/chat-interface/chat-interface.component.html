@@ -1,0 +1,435 @@
+<!-- 🚀 PostCraft 2025 - Independent Scrolling Layout -->
+<div class="chat-container">
+  <!-- Platform Selection - Sticky -->
+  <section class="platform-bar">
+    <span class="platform-label">Select your platforms</span>
+    <div class="platform-chips">
+      <div
+        *ngFor="let platform of platforms"
+        class="platform-chip"
+        [class.selected]="selectedPlatforms.includes(platform.id)"
+        (click)="togglePlatform(platform.id)"
+      >
+        <mat-icon>{{ getPlatformIcon(platform.id) }}</mat-icon>
+        <span>{{ platform.name }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chat Wrapper - Contains messages and input -->
+  <div class="chat-wrapper">
+    <!-- Chat Messages - Independent scrolling -->
+    <main class="chat-messages" #chatMessages>
+      <div
+        *ngFor="let message of messages"
+        class="message-bubble"
+        [class.user-message]="message.type === 'user'"
+        [class.bot-message]="
+          message.type === 'bot' || message.type === 'results'
+        "
+      >
+        <div class="message-content">
+          <div class="message-text">{{ message.content }}</div>
+          <div class="message-time">
+            {{ message.timestamp | date : "HH:mm" }}
+          </div>
+
+          <!-- Social Media Results Display - Horizontally scrollable -->
+          <div
+            *ngIf="message.type === 'results' && message.results"
+            class="results-grid"
+          >
+            <article
+              *ngFor="let result of message.results"
+              class="platform-result"
+              [attr.data-platform]="result.platform"
+            >
+              <header class="platform-header">
+                <mat-icon>{{ getPlatformIcon(result.platform) }}</mat-icon>
+                <span>{{ getPlatformName(result.platform) }}</span>
+              </header>
+
+              <div class="platform-content">
+                <!-- Version Selector -->
+                <div
+                  class="version-selector"
+                  *ngIf="result.all_versions && result.all_versions.length > 1"
+                >
+                  <span class="version-label">A/B Teszt verziók:</span>
+                  <div class="version-buttons">
+                    <button
+                      *ngFor="let version of result.all_versions; let i = index"
+                      type="button"
+                      class="version-button"
+                      [class.active]="(result.selectedVersionIndex || 0) === i"
+                      (click)="selectVersion(result, i)"
+                      [title]="'Verzió ' + (i + 1)"
+                    >
+                      V{{ i + 1 }}
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Post Text with Selected Version -->
+                <div class="post-text">{{ getDisplayContent(result) }}</div>
+
+                <!-- Hashtags for Selected Version -->
+                <div
+                  class="post-hashtags"
+                  *ngIf="getDisplayHashtags(result).length > 0"
+                >
+                  <span
+                    class="hashtag"
+                    *ngFor="let hashtag of getDisplayHashtags(result)"
+                    >{{ hashtag }}</span
+                  >
+                </div>
+
+                <div class="post-actions">
+                  <button
+                    type="button"
+                    (click)="copyToClipboard(getDisplayContent(result))"
+                    title="Copy to clipboard"
+                  >
+                    <mat-icon>content_copy</mat-icon>
+                  </button>
+                  <button
+                    type="button"
+                    (click)="openPlatformPreview(result)"
+                    title="Preview on platform"
+                    class="preview-button"
+                  >
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                  <button type="button" title="Share">
+                    <mat-icon>share</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Typing Indicator -->
+      <div *ngIf="isLoading" class="message-bubble bot-message">
+        <div class="message-content">
+          <div class="typing-indicator">
+            <div class="typing-dots">
+              <div class="typing-dot"></div>
+              <div class="typing-dot"></div>
+              <div class="typing-dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Chat Input - Sticky bottom -->
+    <footer class="chat-input-container">
+      <div class="chat-input-row">
+        <mat-form-field appearance="outline" class="message-input">
+          <mat-label>Describe your campaign or product...</mat-label>
+          <input
+            matInput
+            [(ngModel)]="userMessage"
+            placeholder="e.g., New product launch with 20% discount"
+            (keypress)="onEnterPressed($event)"
+            [disabled]="isLoading"
+            autocomplete="off"
+          />
+        </mat-form-field>
+
+        <button
+          type="button"
+          class="send-button"
+          [disabled]="!userMessage.trim() || isLoading"
+          (click)="sendMessage()"
+          title="Send message"
+        >
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+
+      <!-- Persistent Quick Suggestions -->
+      <div *ngIf="shouldShowSuggestions()" class="quick-suggestions">
+        <div class="suggestion-header">
+          <div class="suggestion-label">Quick start ideas</div>
+          <button
+            type="button"
+            class="more-suggestions-button"
+            (click)="openMoreSuggestions()"
+          >
+            További ötletek...
+            <mat-icon style="font-size: 14px">expand_more</mat-icon>
+          </button>
+        </div>
+
+        <div class="suggestion-chips">
+          <button
+            *ngFor="let suggestion of quickSuggestions"
+            type="button"
+            class="suggestion-chip"
+            (click)="useSuggestion(suggestion)"
+            [title]="suggestion"
+          >
+            {{ suggestion }}
+          </button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- More Suggestions Modal -->
+  <div
+    *ngIf="showMoreSuggestions"
+    class="suggestions-modal"
+    (click)="closeMoreSuggestions()"
+  >
+    <div class="suggestions-modal-content" (click)="$event.stopPropagation()">
+      <div class="suggestions-modal-header">
+        <h3 class="suggestions-modal-title">Összes javaslat</h3>
+        <button
+          type="button"
+          class="close-modal-button"
+          (click)="closeMoreSuggestions()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <div class="suggestions-modal-grid">
+        <button
+          *ngFor="let suggestion of allSuggestions"
+          type="button"
+          class="modal-suggestion-chip"
+          (click)="useSuggestion(suggestion)"
+        >
+          {{ suggestion }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Platform Preview Modal -->
+  <div
+    *ngIf="showPlatformPreview"
+    class="platform-preview-modal"
+    (click)="closePlatformPreview()"
+  >
+    <div class="platform-preview-content" (click)="$event.stopPropagation()">
+      <div class="preview-header">
+        <h3>{{ getPlatformName(selectedPlatformResult?.platform) }} Preview</h3>
+        <button
+          type="button"
+          class="close-preview-button"
+          (click)="closePlatformPreview()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <!-- Platform-Specific Preview -->
+      <div
+        class="preview-container"
+        [attr.data-platform]="selectedPlatformResult?.platform"
+      >
+        <!-- Facebook Preview -->
+        <div
+          *ngIf="selectedPlatformResult?.platform === 'facebook'"
+          class="facebook-preview"
+        >
+          <div class="facebook-header">
+            <img
+              [src]="getPlatformUser('facebook').avatar"
+              class="user-avatar"
+            />
+            <div class="user-info">
+              <div class="user-name">
+                {{ getPlatformUser("facebook").name }}
+              </div>
+              <div class="post-time">
+                {{ getPlatformUser("facebook").time }} · 🌍
+              </div>
+            </div>
+            <div class="post-menu">⋯</div>
+          </div>
+          <div class="post-content">
+            <p>{{ getDisplayContent(selectedPlatformResult) }}</p>
+            <img [src]="getStockPhoto('facebook')" class="post-image" />
+          </div>
+          <div class="facebook-stats">
+            <div class="reactions">👍❤️😊 42 másoknak</div>
+            <div class="engagement">12 hozzászólás · 5 megosztás</div>
+          </div>
+          <div class="facebook-actions">
+            <button>👍 Tetszik</button>
+            <button>💬 Hozzászólás</button>
+            <button>↗️ Megosztás</button>
+          </div>
+        </div>
+
+        <!-- Instagram Preview -->
+        <div
+          *ngIf="selectedPlatformResult?.platform === 'instagram'"
+          class="instagram-preview"
+        >
+          <div class="instagram-header">
+            <img
+              [src]="getPlatformUser('instagram').avatar"
+              class="user-avatar"
+            />
+            <div class="user-info">
+              <div class="user-name">
+                {{ getPlatformUser("instagram").name }}
+              </div>
+              <div class="user-handle">
+                {{ getPlatformUser("instagram").handle }}
+              </div>
+            </div>
+            <div class="post-menu">⋯</div>
+          </div>
+          <img [src]="getStockPhoto('instagram')" class="instagram-image" />
+          <div class="instagram-actions">
+            <div class="action-buttons">
+              <button>❤️</button>
+              <button>💬</button>
+              <button>📤</button>
+            </div>
+            <button class="bookmark">🔖</button>
+          </div>
+          <div class="instagram-likes">123 kedvelés</div>
+          <div class="instagram-caption">
+            <span class="username">{{
+              getPlatformUser("instagram").name
+            }}</span>
+            {{ getDisplayContent(selectedPlatformResult) }}
+          </div>
+          <div class="instagram-hashtags">
+            <span
+              *ngFor="let hashtag of getDisplayHashtags(selectedPlatformResult)"
+              class="hashtag-link"
+              >{{ hashtag }}</span
+            >
+          </div>
+          <div class="instagram-time">
+            {{ getPlatformUser("instagram").time }}
+          </div>
+        </div>
+
+        <!-- LinkedIn Preview -->
+        <div
+          *ngIf="selectedPlatformResult?.platform === 'linkedin'"
+          class="linkedin-preview"
+        >
+          <div class="linkedin-header">
+            <img
+              [src]="getPlatformUser('linkedin').avatar"
+              class="user-avatar"
+            />
+            <div class="user-info">
+              <div class="user-name">
+                {{ getPlatformUser("linkedin").name }}
+              </div>
+              <div class="user-title">
+                {{ getPlatformUser("linkedin").handle }}
+              </div>
+              <div class="post-time">
+                {{ getPlatformUser("linkedin").time }} · 🌍
+              </div>
+            </div>
+            <div class="post-menu">⋯</div>
+          </div>
+          <div class="linkedin-content">
+            <p>{{ getDisplayContent(selectedPlatformResult) }}</p>
+            <div class="linkedin-hashtags">
+              <span
+                *ngFor="
+                  let hashtag of getDisplayHashtags(selectedPlatformResult)
+                "
+                class="hashtag-link"
+                >{{ hashtag }}</span
+              >
+            </div>
+            <img [src]="getStockPhoto('linkedin')" class="post-image" />
+          </div>
+          <div class="linkedin-stats">
+            <div class="reactions">👍💡❤️ 25</div>
+            <div class="engagement">8 hozzászólás</div>
+          </div>
+          <div class="linkedin-actions">
+            <button>👍 Tetszik</button>
+            <button>💬 Hozzászólás</button>
+            <button>↗️ Újraosztás</button>
+            <button>📤 Küldés</button>
+          </div>
+        </div>
+
+        <!-- X (Twitter) Preview -->
+        <div *ngIf="selectedPlatformResult?.platform === 'x'" class="x-preview">
+          <div class="x-header">
+            <img [src]="getPlatformUser('x').avatar" class="user-avatar" />
+            <div class="user-info">
+              <div class="user-names">
+                <span class="user-name">{{ getPlatformUser("x").name }}</span>
+                <span class="user-handle">{{
+                  getPlatformUser("x").handle
+                }}</span>
+                <span class="verified">✓</span>
+              </div>
+              <div class="post-time">{{ getPlatformUser("x").time }}</div>
+            </div>
+            <div class="post-menu">⋯</div>
+          </div>
+          <div class="x-content">
+            <p>{{ getDisplayContent(selectedPlatformResult) }}</p>
+            <div class="x-hashtags">
+              <span
+                *ngFor="
+                  let hashtag of getDisplayHashtags(selectedPlatformResult)
+                "
+                class="hashtag-link"
+                >{{ hashtag }}</span
+              >
+            </div>
+            <img [src]="getStockPhoto('x')" class="post-image" />
+          </div>
+          <div class="x-stats">
+            <span>👁️ 1.2K megtekintés</span>
+          </div>
+          <div class="x-actions">
+            <button>💬 12</button>
+            <button>🔄 3</button>
+            <button>❤️ 24</button>
+            <button>📤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Conversation Button (Optional) -->
+  <button
+    *ngIf="hasResults"
+    type="button"
+    class="new-conversation-button"
+    (click)="startNewConversation()"
+    title="Start new conversation"
+    style="
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      background: var(--purple-600);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+      cursor: pointer;
+    "
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
