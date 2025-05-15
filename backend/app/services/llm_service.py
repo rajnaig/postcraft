@@ -1,3 +1,14 @@
+/**
+ * PostCraft - AI Social Media Generator
+ * Copyright (c) 2025 Gábor Rajnai
+ * All rights reserved. Unauthorized use prohibited.
+ * 
+ * This file is part of PostCraft, a proprietary social media content 
+ * generation system developed for technical demonstration purposes.
+ * 
+ * Contact: rajnaigabor3@gmail.com
+ */
+
 import json
 import uuid
 from datetime import datetime

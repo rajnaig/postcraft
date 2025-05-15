@@ -2,6 +2,45 @@
 
 **AI-Powered Social Media Content Generator**
 
+## ⚠️ **IMPORTANT NOTICE - PROPRIETARY SOFTWARE**
+
+<div align="center">
+
+**📋 FOR EVALUATION PURPOSES ONLY 📋**
+
+*This software is the intellectual property of **Gábor Rajnai***
+
+</div>
+
+### 🛡️ Usage Restrictions
+
+- ✅ **PERMITTED**: Evaluation for employment by Astro Marketing Kft.
+- ✅ **PERMITTED**: Technical assessment and code review
+- ✅ **PERMITTED**: Academic demonstration in professional context
+- ❌ **PROHIBITED**: Commercial use or deployment
+- ❌ **PROHIBITED**: Code redistribution or sharing
+- ❌ **PROHIBITED**: Creating derivative works
+- ❌ **PROHIBITED**: Reverse engineering for competitive purposes
+
+### 📞 Contact for Licensing
+
+For commercial licensing, collaboration, or permission requests:
+- **Email**: [rajnaigabor3@gmail.com](mailto:rajnaigabor3@gmail.com)
+- **LinkedIn**: [linkedin.com/in/gaborrajnai](https://linkedin.com/in/gaborrajnai)
+
+---
+
+## 📝 Technical Demonstration
+
+This project demonstrates expertise in:
+- **AI/LLM Integration** (OpenAI GPT-4)
+- **Full-Stack Development** (Angular + FastAPI)
+- **Modern Web Technologies** (TypeScript, Material Design)
+- **API Design** (REST, Swagger/OpenAPI)
+- **Database Management** (SQLite, SQLAlchemy)
+
+---
+
 PostCraft is an intelligent social media content generator that transforms a single marketing message into platform-optimized posts for Facebook, Instagram, LinkedIn, and X (Twitter). Built with Angular 17+ and FastAPI, it features A/B testing, real-time platform previews, and an intuitive chat interface.
 
 ![PostCraft Demo](https://img.shields.io/badge/Status-Production_Ready-brightgreen)
@@ -339,7 +378,7 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 ## 📄 License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under a Proprietary License. See the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
@@ -348,23 +387,54 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - **FastAPI** for the modern Python web framework
 - **Material Design** for UI/UX inspiration
 
-## 👨‍💻 Author
+---
+
+## 🔒 **Intellectual Property Notice**
+
+### Copyright & Ownership
+- **Author**: Gábor Rajnai
+- **Copyright**: © 2025 All Rights Reserved
+- **License**: Proprietary (See LICENSE file)
+
+### For Astro Marketing Kft.
+This PostCraft demonstration showcases technical capabilities in:
+- AI-powered content generation systems
+- Scalable full-stack architecture  
+- Enterprise-grade API development
+- Modern UI/UX design principles
+
+**Note**: This is a technical demonstration. For production deployment or to discuss licensing terms, please contact me directly.
+
+### Legal Protection
+This software is protected by:
+- Copyright law and international treaties
+- Proprietary license agreement
+- Intellectual property rights
+
+**Unauthorized use, modification, or distribution is strictly prohibited.**
+
+---
+
+## 📞 Contact
 
 **Gábor Rajnai**
-- GitHub: [@rajnaig](https://github.com/rajnaig)
-- Email: rajnaigabor3@gmail.com
-- LinkedIn: [gaborrajnai](https://linkedin.com/in/gaborrajnai)
+- 📧 **Email**: [rajnaigabor3@gmail.com](mailto:rajnaigabor3@gmail.com)
+- 💼 **LinkedIn**: [linkedin.com/in/gaborrajnai](https://linkedin.com/in/gaborrajnai)
+- 🐙 **GitHub**: [@rajnaig](https://github.com/rajnaig)
 
 ---
 
 ## 🔗 Links
 
-- [Live Demo](https://postcraft-demo.vercel.app) *(if available)*
 - [API Documentation](http://localhost:8000/docs)
-- [Frontend Repository](https://github.com/rajnaig/postcraft-frontend) *(if separate)*
+- [GitHub Repository](https://github.com/rajnaig/postcraft)
 
 ---
 
-**Made with ❤️ in Budapest, Hungary**
+<div align="center">
 
-*PostCraft - Crafting the perfect social media presence, one post at a time.*
+**© 2025 Gábor Rajnai - All Rights Reserved**
+
+*PostCraft - Professional Social Media Content Generation*
+
+</div>
